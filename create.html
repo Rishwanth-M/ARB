@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Page</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f06, #ff9a9e);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden; /* Prevent scrolling of the body */
+        }
+
+        .container {
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh; /* Limit the maximum height of the container */
+            overflow-y: auto; /* Add vertical scroll if content exceeds the container height */
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 2em;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .file-label {
+            display: block;
+            background: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 24px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            text-align: center;
+            width: 100%;
+            max-width: 300px; /* Match the image preview max width */
+            margin: 0 auto;
+        }
+
+        .file-label:hover {
+            background: #0056b3;
+            transform: scale(1.05);
+        }
+
+        input[type="file"] {
+            display: none; /* Hide the actual file input */
+        }
+
+        #imagePreview {
+            display: none; /* Initially hide the image preview */
+            margin: 20px auto;
+            max-width: 100%;
+            max-height: 400px; /* Increased height for better visibility */
+            height: auto;
+            border-radius: 12px;
+            border: 2px solid #ddd;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+
+        #imagePreview:hover {
+            transform: scale(1.05);
+        }
+
+        .filter-buttons {
+            display: none; /* Initially hide the filter buttons */
+            margin-top: 20px;
+        }
+
+        .filter-buttons button {
+            margin: 10px;
+            background: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 24px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .filter-buttons button:hover {
+            background: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .filter-buttons button:focus {
+            outline: none;
+        }
+
+        textarea {
+            width: 90%;
+            height: 120px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 20px;
+            resize: vertical;
+            font-size: 16px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: border-color 0.3s;
+        }
+
+        textarea:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        button#postButton {
+            background: linear-gradient(135deg, #007bff, #00d4ff);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 24px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        button#postButton:hover {
+            background: linear-gradient(135deg, #0056b3, #00aaff);
+            transform: scale(1.05);
+        }
+
+        button#postButton:focus {
+            outline: none;
+        }
+
+        button#clearButton {
+            background: #f0f0f0;
+            color: #333;
+            border: 2px solid #ddd;
+            padding: 12px 24px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        button#clearButton:hover {
+            background: #e0e0e0;
+            transform: scale(1.05);
+        }
+
+        button#clearButton:focus {
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Create Your Blog</h1>
+
+        <!-- Filter Buttons -->
+        <div class="filter-buttons">
+            <button data-filter="none">None</button>
+            <button data-filter="grayscale">Grayscale</button>
+            <button data-filter="sepia">Sepia</button>
+            <button data-filter="invert">Invert</button>
+            <button data-filter="blur">Blur</button>
+        </div>
+
+        <!-- Caption Input -->
+        <textarea id="caption" placeholder="Write your interests here..."></textarea>
+        <br><br>
+
+        <!-- Hashtags Input -->
+        <textarea id="hashtags" placeholder="Add hashtags here... (e.g., #tech #travel)"></textarea>
+        <br><br>
+
+        <!-- Submit and Clear Buttons -->
+        <button id="postButton">Post</button>
+        <button id="clearButton">Clear</button>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-analytics.js";
+        import { getFirestore, collection, addDoc, serverTimestamp, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+        import { getAuth } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+    
+        const firebaseConfig = {
+            apiKey: "AIzaSyDYvFdWoLL-YAObctYXBfkqwkUbLBXTsTk",
+            authDomain: "arblog-a19f3.firebaseapp.com",
+            projectId: "arblog-a19f3",
+            storageBucket: "arblog-a19f3.appspot.com",
+            messagingSenderId: "1001446483266",
+            appId: "1:1001446483266:web:436692dd843096e5eed4db",
+            measurementId: "G-4C40XF2L3W"
+        };
+    
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+    
+        // Function to upload caption and hashtags
+        async function uploadPost() {
+            const caption = document.getElementById('caption').value;
+            const hashtags = document.getElementById('hashtags').value.trim();
+
+            if (caption) {
+                try {
+                    // Get the current user
+                    const user = auth.currentUser;
+                    if (!user) {
+                        alert('User is not logged in.');
+                        return;
+                    }
+    
+                    // Retrieve username from Firestore if it exists
+                    const userDoc = await getDoc(doc(db, 'users', user.uid));
+                    const username = userDoc.exists() ? userDoc.data().username : 'User';
+    
+                    // Add the caption and hashtags to Firestore under the user's posts subcollection
+                    await addDoc(collection(db, 'users', user.uid, 'posts'), {
+                        caption: caption,
+                        hashtags: hashtags.split(/\s+/), // Split hashtags by spaces
+                        username: username,
+                        ownerId: user.uid,
+                        timestamp: serverTimestamp(),
+                        likes: 0,
+                        likedUsers: []
+                    });
+    
+                    alert('Post created successfully!');
+                    window.location.href = 'home.html'; // Redirect to home page
+                } catch (error) {
+                    console.error('Error saving post: ', error);
+                }
+            } else {
+                alert('Please enter a caption.');
+            }
+        }
+    
+        const postButton = document.getElementById('postButton');
+        postButton.addEventListener('click', uploadPost);
+    
+        const clearButton = document.getElementById('clearButton');
+        clearButton.addEventListener('click', function() {
+            document.getElementById('caption').value = '';
+            document.getElementById('hashtags').value = '';
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mySocial - Responsive Social Media Website</title>
+    <!-- IconScout CDN -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="./style.css">
+
+</head>
+
+<body>
+    <nav>
+        <div class="container">
+            <h2 class="logo">𝘼𝙍 𝘽𝙡𝙤𝙜𝙜𝙞𝙣𝙜</h2>
+            
+            <div class="create">
+                <div class="search-bar">
+                    
+                </div>
+                <div class="profile-nav">
+                
+                    <a href="home.html">Home</a>
+                </div>
+                <a href="create.html" class="btn btn-primary">Create</a>
+                <div class="profile-photo">
+                    <img src="" alt="Profile Photo" id="profileImage">
+                </div>
+                <div id="profileOptions" class="profile-options" style="display: none;">
+                    <a class="profile">
+                        <div class="profile-photo">
+                            <img src="" alt="Profile Photo" id="profileDropdownImage">
+                        </div>
+                        <div class="handle">
+                            <h4 id="profile-name"></h4>
+                            <p id="profile-handle" class="text-muted"></p>
+                        </div>
+                    </a>
+                    <a href="profile.html" id="myProfileOption">My Profile</a>
+    <a href="login.html" id="loginOption">Login</a>
+    <a href="signup.html" id="signupOption">Sign Up</a>
+    <a href="#" id="logoutOption" style="display: none;">Logout</a>
+                </div>                                  
+            </div>            
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            <div class="left">
+                <a class="profile">
+                    <div class="profile-photo">
+                        <img src="" alt="Profile Photo" id="sidebarProfileImage">
+                    </div>
+                    <div class="handle">
+                        <h4 id="sidebarProfileName"></h4>
+                        <p class="text-muted" id="sidebarProfileHandle"></p>
+                    </div>
+                </a>
+
+                <div class="sidebar">
+                    <a class="menu-item active">
+                        <span><i class="uil uil-home"></i></span>
+                        <h3>Home</h3>   
+                    </a>
+                    <a class="menu-item" id="exploreMenuItem">
+                        <span><i class="uil uil-compass"></i></span>
+                        <h3>Explore</h3>
+                    </a>
+                    <div id="searchModal" class="modal">
+                        <div class="modal-content">
+                            <span class="close-btn">&times;</span>
+                            <h2>Search for a User</h2>
+                            <input type="text" id="searchInput" placeholder="Enter username">
+                            <div id="suggestionsContainer"></div>
+                            <button id="searchButton">Search</button>
+                        </div>
+                    </div>
+                      
+                    <a class="menu-item" id="notifications">
+                        <span><i class="uil uil-bell"><small class="notification-count" style="display:none;">0</small></i></span>
+                        <h3>Notification</h3>
+                        <!--------------- NOTIFICATION POPUP --------------->
+                        <div class="notifications-popup">
+                            <!-- Notifications will be dynamically added here -->
+                        </div>
+                        <!--------------- END NOTIFICATION POPUP --------------->
+                    </a>
+                    
+                    
+                    <a class="menu-item" id="messages-notifications">
+                        <span><i class="uil uil-envelope-alt"><small class="notification-count">6</small></i></span>
+                        <h3>Messages</h3>
+                    </a>
+                    <a class="menu-item">
+                        <span><i class="uil uil-bookmark"></i></span>
+                        <h3>Bookmarks</h3>
+                    </a>
+                    <a class="menu-item">
+                        <span><i class="uil uil-chart-line"></i></span>
+                        <h3>Analytics</h3>
+                    </a>
+                    <a class="menu-item" id="theme">
+                        <span><i class="uil uil-palette"></i></span>
+                        <h3>Theme</h3>
+                    </a>
+                    <a class="menu-item">
+                        <span><i class="uil uil-setting"></i></span>
+                        <h3>Setting</h3>
+                    </a>
+                </div>
+                <!----------------- END OF SIDEBAR -------------------->
+                <label class="btn btn-primary" for="create-post">Create Post</label>
+            </div>
+           
+            <div class="middle">
+                <div class="feeds"></div>
+            </div>
+        </div>
+
+        <div id="commentsPopup" class="popup hidden">
+            <div class="popup-content">
+                <span class="commet-close-btn">&times;</span>
+                <div id="commentsContainer"></div>
+                <div class="comment-input-container">
+                    <input type="text" id="commentInput" class="comment-input" placeholder="Write a comment...">
+                    <button id="sendCommentBtn">Send</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!----------------- THEME CUSTOMIZATION -------------------->
+    <div class="customize-theme">
+        <div class="card">
+            <h2>Customize your view</h2>
+            <p class="text-muted">Manage your font size, color, and background</p>
+
+            <!----------- FONT SIZE ----------->
+            <div class="font-size">
+                <h4>Font Size</h4>
+                <div>
+                    <h6>Aa</h6>
+                    <div class="choose-size">
+                        <span class="font-size-1"></span>
+                        <span class="font-size-2 active"></span>
+                        <span class="font-size-3"></span>
+                        <span class="font-size-4"></span>
+                        <span class="font-size-5"></span>
+                    </div>
+                    <h3>Aa</h3>
+                </div>
+            </div>
+
+            <!----------- PRIMARY COLORS ----------->
+            <div class="color">
+                <h4>Color</h4>
+                <div class="choose-color">
+                    <span class="color-1 active"></span>
+                    <span class="color-2"></span>
+                    <span class="color-3"></span>
+                    <span class="color-4"></span>
+                    <span class="color-5"></span>
+                </div>
+            </div>
+
+            <!----------- BACKGROUND COLORS ----------->
+            <div class="background">
+                <h4>Background</h4>
+                <div class="choose-bg">
+                    <div class="bg-1 active">
+                        <span></span>
+                        <h5 for="bg-1">Light</h5>
+                    </div>
+                    <div class="bg-2">
+                        <span></span>
+                        <h5 for="bg-2">Dim</h5>
+                    </div>
+                    <div class="bg-3">
+                        <span></span>
+                        <h5 for="bg-3">Dark</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { auth, db } from './firebase-config.js';
+        import { collection, query, where, orderBy, onSnapshot, doc, getDoc, updateDoc, getDocs, runTransaction, addDoc, serverTimestamp  } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+        import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+    
+        // Profile dropdown toggle
+        document.getElementById("profileImage").addEventListener("click", function() {
+            const options = document.getElementById("profileOptions");
+            options.style.display = (options.style.display === "none" || options.style.display === "") ? "block" : "none";
+        });
+    
+        document.addEventListener("click", function(event) {
+            const options = document.getElementById("profileOptions");
+            const profileImage = document.getElementById("profileImage");
+            if (event.target !== options && event.target !== profileImage) {
+                options.style.display = "none";
+            }
+        });
+    
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                // Fetch user data from Firestore
+                const userDocRef = doc(db, "users", user.uid);
+                const userDoc = await getDoc(userDocRef);
+    
+                if (userDoc.exists()) {
+                    const userData = userDoc.data();
+                    const profilePicUrl = userData.profilePicUrl || './images/profile-1.jpg';
+    
+                    // Update profile information in the navbar
+                    document.getElementById('profile-name').textContent = userData.fullname;
+                    document.getElementById('profile-handle').textContent = `@${userData.username}`;
+                    document.getElementById('profileImage').src = profilePicUrl;
+                    document.getElementById('profileDropdownImage').src = profilePicUrl;
+    
+                    // Update profile information in the sidebar
+                    document.getElementById('sidebarProfileName').textContent = userData.fullname;
+                    document.getElementById('sidebarProfileHandle').textContent = `@${userData.username}`;
+                    document.getElementById('sidebarProfileImage').src = profilePicUrl;
+    
+                    // Load user's posts and pass the profile picture URL
+                    loadPosts(user.uid, profilePicUrl);
+                } else {
+                    console.error("No such user document!");
+                }
+            } else {
+                document.getElementById('profileOptions').style.display = 'none';
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const notificationIcon = document.getElementById('notifications');
+            const notificationsPopup = document.querySelector('.notifications-popup');
+            const notificationCount = document.querySelector('.notification-count'); // Element to display the count
+        
+            notificationIcon.addEventListener('click', function() {
+                const isVisible = notificationsPopup.style.display === 'block';
+                if (isVisible) {
+                    // Hide notifications popup and clear content
+                    notificationsPopup.style.display = 'none';
+                    notificationsPopup.innerHTML = ''; // Clear the notifications content
+                    resetNotificationCount(); // Reset the count to 0
+                } else {
+                    // Show notifications popup
+                    notificationsPopup.style.display = 'block';
+                    // Fetch and display new notifications
+                    onAuthStateChanged(auth, async (user) => {
+                        if (user) {
+                            const userId = user.uid;
+                            fetchNotifications(userId); // Fetch and display new notifications
+                        }
+                    });
+                }
+            });
+        
+            document.addEventListener('click', function(event) {
+                if (!notificationIcon.contains(event.target) && !notificationsPopup.contains(event.target)) {
+                    notificationsPopup.style.display = 'none';
+                    notificationsPopup.innerHTML = ''; // Clear the notifications content
+                    resetNotificationCount(); // Reset the count to 0
+                }
+            });
+        
+            async function fetchNotifications(userId) {
+                const userRef = doc(db, 'users', userId);
+        
+                try {
+                    const userDoc = await getDoc(userRef);
+                    const userData = userDoc.data();
+        
+                    if (userData) {
+                        let count = 0; // Notification count
+        
+                        // Process followers
+                        if (userData.followers) {
+                            for (const followerId of userData.followers) {
+                                const followerRef = doc(db, 'users', followerId);
+                                const followerDoc = await getDoc(followerRef);
+                                const followerData = followerDoc.data();
+                                addNotification(followerData.fullname, 'started following you', followerData.profilePicUrl, 'Just Now');
+                                count++;
+                            }
+                        }
+        
+                        // Process likes
+                        const postsRef = collection(db, 'users', userId, 'posts');
+                        const postsQuery = query(postsRef);
+                        const postsSnapshot = await getDocs(postsQuery);
+        
+                        for (const postDoc of postsSnapshot.docs) {
+                            const postData = postDoc.data();
+                            if (postData.likedUsers) {
+                                for (const likeId of postData.likedUsers) {
+                                    const likerRef = doc(db, 'users', likeId);
+                                    const likerDoc = await getDoc(likerRef);
+                                    const likerData = likerDoc.data();
+                                    addNotification(likerData.fullname, 'liked your post', likerData.profilePicUrl, 'Just Now');
+                                    count++;
+                                }
+                            }
+                        }
+        
+                        // Process following
+                        if (userData.following) {
+                            for (const followingId of userData.following) {
+                                const followingRef = doc(db, 'users', followingId);
+                                const followingDoc = await getDoc(followingRef);
+                                const followingData = followingDoc.data();
+                                addNotification(followingData.fullname, 'started following you', followingData.profilePicUrl, 'Just Now');
+                                count++;
+                            }
+                        }
+        
+                        // Update notification count
+                        updateNotificationCount(count);
+                    }
+                } catch (error) {
+                    console.error('Error fetching notifications:', error);
+                }
+            }
+        
+            function addNotification(userName, action, profilePicUrl, timeAgo) {
+                const notificationElement = document.createElement('div');
+                notificationElement.className = 'notification-item'; // Added class for styling
+                notificationElement.innerHTML = `
+                    <div class="profile-photo">
+                        <img src="${profilePicUrl || './images/default-profile.jpg'}" alt="Profile Picture">
+                    </div>
+                    <div class="notification-body">
+                        <b>${userName}</b> ${action}
+                        <small class="text-muted">${timeAgo}</small>
+                    </div>
+                `;
+                notificationsPopup.prepend(notificationElement);
+            }
+        
+            function updateNotificationCount(count) {
+                if (count > 0) {
+                    notificationCount.textContent = count;
+                    notificationCount.style.display = 'inline'; // Show the count
+                } else {
+                    notificationCount.style.display = 'none'; // Hide if no notifications
+                }
+            }
+        
+            function resetNotificationCount() {
+                notificationCount.textContent = '0';
+            }
+        });
+        
+        
+
+
+
+        // Function to update profile options based on login status
+function updateProfileOptions() {
+    const user = auth.currentUser; // Get the current logged-in user
+    const myProfileOption = document.getElementById('myProfileOption');
+    const loginOption = document.getElementById('loginOption');
+    const signupOption = document.getElementById('signupOption');
+    const logoutOption = document.getElementById('logoutOption');
+
+    if (user) {
+        // User is logged in
+        if (myProfileOption) {
+            myProfileOption.style.display = 'block';
+        }
+        if (loginOption) {
+            loginOption.style.display = 'none';
+        }
+        if (signupOption) {
+            signupOption.style.display = 'none';
+        }
+        if (logoutOption) {
+            logoutOption.style.display = 'block';
+        }
+    } else {
+        // User is not logged in
+        if (myProfileOption) {
+            myProfileOption.style.display = 'none';
+        }
+        if (loginOption) {
+            loginOption.style.display = 'block';
+        }
+        if (signupOption) {
+            signupOption.style.display = 'block';
+        }
+        if (logoutOption) {
+            logoutOption.style.display = 'none';
+        }
+    }
+}
+
+// Function to handle logout
+async function handleLogout() {
+    try {
+        await auth.signOut(); // Sign out the user
+        // Redirect to the sign-up page or login page
+        window.location.href = 'signup.html'; 
+    } catch (error) {
+        console.error('Error signing out:', error);
+    }
+}
+
+// Attach event listener to logout option
+const logoutOption = document.getElementById('logoutOption');
+if (logoutOption) {
+    logoutOption.addEventListener('click', handleLogout);
+}
+
+// Update profile options on page load and auth state change
+auth.onAuthStateChanged(updateProfileOptions);
+updateProfileOptions(); // Ensure it's also run on page load
+
+
+    
+function loadPosts(userId) {
+    const userRef = doc(db, 'users', userId);
+
+    getDoc(userRef).then((userSnapshot) => {
+        const followedUsers = userSnapshot.data().following || [];  // Assuming `following` is an array of followed user IDs
+
+        // Include the current user's ID in the list
+        followedUsers.push(userId);
+
+        const postPromises = followedUsers.map((followedUserId) => {
+            const userPostsRef = collection(db, 'users', followedUserId, 'posts');
+            const q = query(userPostsRef, orderBy('timestamp', 'desc'));
+
+            return getDocs(q);  // Fetch the posts
+        });
+
+        Promise.all(postPromises).then((snapshots) => {
+            const feedsContainer = document.querySelector('.feeds');
+            feedsContainer.innerHTML = '';
+
+            // Combine all posts, sort them by timestamp, and render them
+            const allPosts = [];
+            snapshots.forEach((snapshot) => {
+                snapshot.forEach((doc) => {
+                    allPosts.push(doc);
+                });
+            });
+
+            // Sort posts by timestamp in descending order
+            allPosts.sort((a, b) => b.data().timestamp.seconds - a.data().timestamp.seconds);
+
+            // Render all posts
+            allPosts.forEach((doc) => {
+                const ownerId = doc.data().ownerId; // Get the owner ID of the post
+                getOwnerProfilePic(ownerId).then(profilePicUrl => {
+                    renderPost(doc, profilePicUrl);
+                });
+            });
+        });
+    });
+}
+
+function getOwnerProfilePic(ownerId) {
+    const userRef = doc(db, 'users', ownerId);
+
+    return getDoc(userRef).then((userDoc) => {
+        if (userDoc.exists()) {
+            return userDoc.data().profilePicUrl || 'default-profile-pic.jpg';  // Return profile picture URL or default
+        } else {
+            console.error("User document does not exist!");
+            return 'default-profile-pic.jpg'; // Return default image if user doesn't exist
+        }
+    }).catch((error) => {
+        console.error("Error fetching user profile picture: ", error);
+        return 'default-profile-pic.jpg'; // Return default image in case of an error
+    });
+}
+
+// Function to update post usernames
+function updatePostUsernames(ownerId, newUsername) {
+    const feedsContainer = document.querySelector('.feeds');
+    const posts = feedsContainer.querySelectorAll('.feed[data-owner-id="' + ownerId + '"]');
+
+    posts.forEach(post => {
+        const usernameLink = post.querySelector('.info a');
+        if (usernameLink) {
+            usernameLink.textContent = `${newUsername || "User"}`;
+        }
+    });
+}
+
+// Function to listen for user updates
+function listenForUserUpdates(ownerId) {
+    const userRef = doc(db, 'users', ownerId);
+    onSnapshot(userRef, (doc) => {
+        if (doc.exists()) {
+            const userData = doc.data();
+            // Ensure this function is defined before calling it
+            updatePostUsernames(ownerId, userData.username);
+        }
+    });
+}
+
+// Your existing renderPost function
+function renderPost(doc, profilePicUrl) {
+    const feedsContainer = document.querySelector('.feeds');
+    if (feedsContainer) {
+        const post = `
+            <div class="feed" data-id="${doc.id}" data-owner-id="${doc.data().ownerId}">
+                <div class="head">
+                    <div class="user">
+                        <div class="profile-photo">
+                            <img src="${profilePicUrl}" alt="Profile Picture">
+                        </div>
+                        <div class="info">
+                            <a href="/profile.html?uid=${doc.data().ownerId}">@${doc.data().username || "User"}</a>
+                        </div>
+                    </div>
+                    <span class="edit">
+                        <i class="uil uil-ellipsis-h"></i>
+                    </span>
+                </div>
+                <div class="caption-container">
+                    <div class="caption">
+                        <p> ${doc.data().caption} </p>
+                    </div>
+                </div>
+                <div class="caption">
+                    <p><b><span class="hashtag">#${doc.data().hashtags || "yourHashtag"}</span></b></p>
+                </div>
+                <div class="action-buttons">
+                    <div class="interaction-buttons">
+                        <span class="like-button">
+                            <i class="uil uil-heart"></i>
+                            <span class="like-count">${doc.data().likes || 0}</span>
+                        </span>
+                        <span class="comment-icon">
+                            <i class="uil uil-comment-dots"></i>
+                        </span>
+                        <span><i class="uil uil-share-alt"></i></span>
+                    </div>
+                    <div class="bookmark">
+                        <span><i class="uil uil-bookmark-full"></i></span>
+                    </div>
+                </div>
+                <small>${new Date(doc.data().timestamp?.seconds * 1000).toLocaleTimeString()}</small>
+            </div>
+        `;
+
+        feedsContainer.insertAdjacentHTML('afterbegin', post);
+
+        // Listen for user updates for the post's owner
+        listenForUserUpdates(doc.data().ownerId);
+
+        // Like button event
+        const likeButton = feedsContainer.querySelector(`[data-id="${doc.id}"] .like-button`);
+        if (likeButton) likeButton.addEventListener('click', () => handleLike(doc.id, doc.data().ownerId));
+
+        // Comment icon click event for opening popup
+        const commentIcon = feedsContainer.querySelector(`[data-id="${doc.id}"] .comment-icon`);
+        if (commentIcon) commentIcon.addEventListener('click', () => toggleCommentsPopup(doc.id, doc.data().ownerId));
+    }
+}
+
+
+/// Function to toggle popup visibility and load comments
+function toggleCommentsPopup(postId, ownerId) {
+    const commentsPopup = document.getElementById('commentsPopup');
+    const commentsContainer = document.getElementById('commentsContainer');
+
+    // Check if the popup and container exist
+    if (!commentsPopup) {
+        console.error('Comments popup element not found.');
+        return;
+    }
+
+    if (!commentsContainer) {
+        console.error('Comments container element not found.');
+        return;
+    }
+
+    // Clear previous comments
+    commentsContainer.innerHTML = ''; 
+
+    // Load comments for the post
+    loadComments(postId, ownerId).then(() => {
+        // Show popup after comments have loaded
+        commentsPopup.classList.remove('hidden'); // Show popup
+    }).catch((error) => {
+        console.error('Error loading comments:', error);
+    });
+
+    // Set the postId and ownerId in the send button data attributes for later use
+    const sendCommentBtn = document.getElementById('sendCommentBtn');
+    const commentInput = document.getElementById('commentInput');
+    
+    if (sendCommentBtn) {
+        sendCommentBtn.dataset.postId = postId;
+        sendCommentBtn.dataset.ownerId = ownerId;
+    } else {
+        console.error('Send comment button not found.');
+    }
+    
+    if (commentInput) {
+        commentInput.value = ""; // Clear comment input
+    } else {
+        console.error('Comment input element not found.');
+    }
+}
+
+
+
+
+    // Send comment button event listener
+    const sendCommentBtn = document.getElementById('sendCommentBtn');
+    if (sendCommentBtn) {
+        sendCommentBtn.addEventListener('click', () => {
+            const postId = sendCommentBtn.dataset.postId;
+            const ownerId = sendCommentBtn.dataset.ownerId;
+            const commentInput = document.getElementById('commentInput').value;
+
+            handleComment(postId, ownerId, commentInput); // Send comment
+        });
+    }
+;
+
+// Function to load comments
+async function loadComments(postId, ownerId) {
+    const commentsContainer = document.getElementById('commentsContainer');
+    try {
+        const commentsQuery = query(
+            collection(db, 'users', ownerId, 'posts', postId, 'comments'),
+            orderBy('timestamp', 'asc')
+        );
+        const querySnapshot = await getDocs(commentsQuery);
+        commentsContainer.innerHTML = ''; // Clear existing comments
+
+        querySnapshot.forEach(doc => {
+            const comment = doc.data();
+            const commentElement = document.createElement('p');
+            // Ensure that you're using the correct username here
+            const username = comment.username || "User"; // Fallback if no username
+            commentElement.innerHTML = `<b>${username}:</b> ${comment.comment}`;
+            commentsContainer.appendChild(commentElement);
+        });
+    } catch (error) {
+        console.error('Error loading comments: ', error);
+    }
+}
+
+
+// Function to handle adding comments
+async function handleComment(postId, ownerId, comment) {
+    if (comment.trim() === "") return;
+
+    try {
+        // Retrieve the user document to get the username
+        const userDoc = await getDoc(doc(db, 'users', ownerId));
+        
+        // Check if username exists in the document and log it
+        const username = userDoc.exists() ? userDoc.data().username || "User" : "User";
+        console.log("Fetched username:", username); // Log the username to verify
+
+        // Reference to the comments sub-collection
+        const commentsRef = collection(db, 'users', ownerId, 'posts', postId, 'comments');
+        
+        // Add the comment to the comments collection
+        await addDoc(commentsRef, {
+            username: username, // Dynamically set username
+            comment: comment,
+            timestamp: serverTimestamp()
+        });
+
+        // Reload comments after adding new one
+        await loadComments(postId, ownerId);
+
+        // Clear the comment input if the element exists
+        const commentInput = document.getElementById('commentInput');
+        if (commentInput) {
+            commentInput.value = "";
+        } else {
+            console.error('Comment input element with ID "commentInput" not found.');
+        }
+
+    } catch (error) {
+        console.error('Error adding comment:', error);
+    }
+}
+
+
+        
+           
+        async function handleLike(postId, ownerId) {
+            console.log(`Handling like for postId: ${postId}`);
+            const likeButton = document.querySelector(`[data-id="${postId}"] .like-button`);
+            const likeCountElement = likeButton.querySelector('.like-count');
+            const userId = auth.currentUser.uid;
+            console.log(`Current userId: ${userId}`);
+        
+            // Reference to the post document in the original post owner's subcollection
+            const postRef = doc(db, 'users', ownerId, 'posts', postId);
+        
+            try {
+                await runTransaction(db, async (transaction) => {
+                    const postDoc = await transaction.get(postRef);
+                    console.log(`Post document exists: ${postDoc.exists()}`);
+        
+                    if (!postDoc.exists()) {
+                        throw new Error("Document does not exist!");
+                    }
+        
+                    const postData = postDoc.data();
+                    const likedUsers = postData.likedUsers || [];
+                    const isLiked = likedUsers.includes(userId);
+        
+                    let newLikeCount = postData.likes || 0;
+        
+                    if (isLiked) {
+                        // Unlike the post
+                        transaction.update(postRef, {
+                            likedUsers: likedUsers.filter(id => id !== userId),
+                            likes: newLikeCount - 1
+                        });
+                        newLikeCount--;
+                    } else {
+                        // Like the post
+                        transaction.update(postRef, {
+                            likedUsers: [...likedUsers, userId],
+                            likes: newLikeCount + 1
+                        });
+                        newLikeCount++;
+                    }
+        
+                    // Update the local UI with the new like count
+                    likeCountElement.textContent = newLikeCount;
+                    likeButton.classList.toggle('liked', !isLiked);
+        
+                    console.log('Like count updated successfully:', newLikeCount);
+                });
+            } catch (error) {
+                console.error('Error updating like status:', error);
+            }
+        }
+    
+        document.getElementById('exploreMenuItem').addEventListener('click', function() {
+            document.getElementById('searchModal').style.display = 'block';
+        });
+        
+        document.querySelector('.close-btn').addEventListener('click', function() {
+            document.getElementById('searchModal').style.display = 'none';
+        });
+
+        document.querySelector('.commet-close-btn').addEventListener('click', function() {
+            document.getElementById('commentsPopup').style.display = 'none';
+        });
+        
+        document.getElementById('searchButton').addEventListener('click', async function() {
+            const username = document.getElementById('searchInput').value.trim();
+        
+            if (username) {
+                try {
+                    const usersRef = collection(db, 'users');
+                    const q = query(usersRef, where('username', '==', username));
+                    const querySnapshot = await getDocs(q);
+        
+                    if (!querySnapshot.empty) {
+                        // Get the userId of the searched user
+                        const userId = querySnapshot.docs[0].id;
+                        
+                        // Redirect to the profile page of the searched user using the correct variable
+                        window.location.href = `profile.html?uid=${userId}`;
+        
+                    } else {
+                        alert('User not found');
+                    }
+                } catch (error) {
+                    console.error('Error searching for user:', error);
+                }
+            } else {
+                alert('Please enter a username.');
+            }
+        });
+        
+        document.getElementById('searchInput').addEventListener('input', async function() {
+            const queryText = this.value.trim();
+            const suggestionsContainer = document.getElementById('suggestionsContainer');
+            
+            if (queryText.length > 0) {
+                try {
+                    const usersRef = collection(db, 'users');
+                    const q = query(usersRef, where('username', '>=', queryText), where('username', '<=', queryText + '\uf8ff'));
+                    const querySnapshot = await getDocs(q);
+        
+                    suggestionsContainer.innerHTML = ''; // Clear previous suggestions
+        
+                    if (!querySnapshot.empty) {
+                        querySnapshot.forEach(doc => {
+                            const username = doc.data().username;
+                            const userId = doc.id;
+                            const suggestionItem = document.createElement('div');
+                            suggestionItem.className = 'suggestion-item';
+                            suggestionItem.textContent = username;
+                            suggestionItem.addEventListener('click', () => {
+                                window.location.href = `profile.html?uid=${userId}`;
+                            });
+                            suggestionsContainer.appendChild(suggestionItem);
+                        });
+                    } else {
+                        suggestionsContainer.innerHTML = '<p>No users found</p>';
+                    }
+                } catch (error) {
+                    console.error('Error fetching user suggestions:', error);
+                }
+            } else {
+                suggestionsContainer.innerHTML = ''; // Clear suggestions if input is empty
+            }
+        });
+    </script>
+    
+    <script>
+    // Sidebar
+    const menuItems = document.querySelectorAll('.menu-item');
+    
+    // Theme
+    const theme = document.querySelector('#theme');
+    const themeModal = document.querySelector('.customize-theme');
+    const fontSize = document.querySelectorAll('.choose-size span');
+    const root = document.querySelector(':root');
+    const colorPalette = document.querySelectorAll('.choose-color span');
+    const Bg1 = document.querySelector('.bg-1');
+    const Bg2 = document.querySelector('.bg-2');
+    const Bg3 = document.querySelector('.bg-3');
+    
+    // ============== SIDEBAR ============== 
+    
+    // Remove active class from all menu items
+    const changeActiveItem = () => {
+        menuItems.forEach(item => {
+            item.classList.remove('active');
+        });
+    };
+    
+    // ============== THEME / DISPLAY CUSTOMIZATION ============== 
+    
+    // Opens Modal
+    const openThemeModal = () => {
+        themeModal.style.display = 'grid';
+    };
+    
+    // Closes Modal
+    const closeThemeModal = (e) => {
+        if (e.target.classList.contains('customize-theme')) {
+            themeModal.style.display = 'none';
+        }
+    };
+    
+    themeModal.addEventListener('click', closeThemeModal);
+    theme.addEventListener('click', openThemeModal);
+    
+    // ============== FONT SIZE ============== 
+    
+    // Remove active class from spans or font size selectors
+    const removeSizeSelectors = () => {
+        fontSize.forEach(size => {
+            size.classList.remove('active');
+        });
+    };
+    
+    fontSize.forEach(size => { 
+        size.addEventListener('click', () => {
+            removeSizeSelectors();
+            let fontSize;
+            size.classList.toggle('active');
+    
+            if (size.classList.contains('font-size-1')) { 
+                fontSize = '10px';
+                root.style.setProperty('----sticky-top-left', '5.4rem');
+                root.style.setProperty('----sticky-top-right', '5.4rem');
+            } else if (size.classList.contains('font-size-2')) { 
+                fontSize = '13px';
+                root.style.setProperty('----sticky-top-left', '5.4rem');
+                root.style.setProperty('----sticky-top-right', '-7rem');
+            } else if (size.classList.contains('font-size-3')) {
+                fontSize = '16px';
+                root.style.setProperty('----sticky-top-left', '-2rem');
+                root.style.setProperty('----sticky-top-right', '-17rem');
+            } else if (size.classList.contains('font-size-4')) {
+                fontSize = '19px';
+                root.style.setProperty('----sticky-top-left', '-5rem');
+                root.style.setProperty('----sticky-top-right', '-25rem');
+            } else if (size.classList.contains('font-size-5')) {
+                fontSize = '22px';
+                root.style.setProperty('----sticky-top-left', '-12rem');
+                root.style.setProperty('----sticky-top-right', '-35rem');
+            }
+    
+            // Change font size of the root html element
+            document.querySelector('html').style.fontSize = fontSize;
+        });
+    });
+    
+    // Remove active class from colors
+    const changeActiveColorClass = () => {
+        colorPalette.forEach(colorPicker => {
+            colorPicker.classList.remove('active');
+        });
+    };
+    
+    // Change color primary
+    colorPalette.forEach(color => {
+        color.addEventListener('click', () => {
+            let primaryHue;
+            changeActiveColorClass(); 
+    
+            if (color.classList.contains('color-1')) {
+                primaryHue = 252;
+            } else if (color.classList.contains('color-2')) {
+                primaryHue = 52;
+            } else if (color.classList.contains('color-3')) {
+                primaryHue = 352;
+            } else if (color.classList.contains('color-4')) {
+                primaryHue = 152;
+            } else if (color.classList.contains('color-5')) {
+                primaryHue = 202;
+            }
+    
+            color.classList.add('active');
+            root.style.setProperty('--primary-color-hue', primaryHue);
+        });
+    });
+    
+    // Theme Background Values
+    let lightColorLightness;
+    let whiteColorLightness;
+    let darkColorLightness;
+    
+    // Changes background color
+    const changeBG = () => {
+        root.style.setProperty('--light-color-lightness', lightColorLightness);
+        root.style.setProperty('--white-color-lightness', whiteColorLightness);
+        root.style.setProperty('--dark-color-lightness', darkColorLightness);
+    };
+    
+    Bg1.addEventListener('click', () => {
+        // Add active class
+        Bg1.classList.add('active');
+        // Remove active class from the others
+        Bg2.classList.remove('active');
+        Bg3.classList.remove('active');
+        // Remove customized changes from local storage
+        window.location.reload();
+    });
+    
+    Bg2.addEventListener('click', () => {
+        darkColorLightness = '95%';
+        whiteColorLightness = '20%';
+        lightColorLightness = '15%';
+    
+        // Add active class
+        Bg2.classList.add('active');
+        // Remove active class from the others
+        Bg1.classList.remove('active');
+        Bg3.classList.remove('active');
+        changeBG();
+    });
+    
+    Bg3.addEventListener('click', () => {
+        darkColorLightness = '95%';
+        whiteColorLightness = '10%';
+        lightColorLightness = '0%';
+    
+        // Add active class
+        Bg3.classList.add('active');
+        // Remove active class from the others
+        Bg1.classList.remove('active');
+        Bg2.classList.remove('active');
+        changeBG();
+    });
+    </script>
+    
+</body>
+</html>
